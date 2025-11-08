@@ -1,14 +1,14 @@
 import AppLayout from "@/components/AppLayout";
 
-export default function Home() {
+export default function Citas() {
   return (
-    <AppLayout title="Inicio" showBackButton={false}>
+    <AppLayout title="Mis Citas" showBackButton={false}>
       <div className="p-4">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">
-          Bienvenido al Sistema de Citas
+          Mis Citas
         </h2>
         <p className="text-gray-600">
-          Sistema de gestión de citas para profesionales y clientes.
+          Gestiona tus citas programadas.
         </p>
       </div>
     </AppLayout>
