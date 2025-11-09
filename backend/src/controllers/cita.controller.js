@@ -1,9 +1,8 @@
 import prisma from '../lib/prisma.js';
+import { initiatePayment } from '../../utils/openPayments.js';
 
 /**
- * Crea una nueva cita (Protegido).
- * El 'usuarioId' se toma del token, no del body.
- * Ruta: POST /api/citas
+ * Crea una nueva cita e inicia el pago automáticamente
  */
 export const createCita = async (req, res) => {
   try {
@@ -12,25 +11,62 @@ export const createCita = async (req, res) => {
     const {
       profesionalId, 
       servicioId,    
-      fecha,         // ej: "2025-12-01T00:00:00.000Z" (debe ser un string ISO)
-      horario        // ej: "14:30"
+      fecha,         
+      horario,
+      monto          // Agregar monto del servicio
     } = req.body;
 
-    if (!profesionalId || !servicioId || !fecha || !horario) {
+    if (!profesionalId || !servicioId || !fecha || !horario || !monto) {
       return res.status(400).json({ message: "Todos los campos son obligatorios" });
     }
 
+    // 1. Crear la cita en la base de datos
     const newCita = await prisma.cita.create({
       data: {
-        fecha: new Date(fecha), // Convertir el string ISO a un objeto Date
+        fecha: new Date(fecha),
         horario: horario,
         usuario: { connect: { id: clienteUserId } },
         profesional: { connect: { id: parseInt(profesionalId) } },
         servicio: { connect: { id: parseInt(servicioId) } }
+      },
+      include: {
+        usuario: { select: { id: true, nombre: true, walletAddress: true } },
+        profesional: { 
+          select: { 
+            id: true, 
+            nombre: true,
+            usuario: { select: { walletAddress: true } }
+          } 
+        },
+        servicio: { select: { id: true, nombre: true } }
       }
     });
 
-    res.status(201).json(newCita);
+    // 2. Obtener los wallet addresses del cliente y profesional
+    const clienteWallet = newCita.usuario.walletAddress;
+    const profesionalWallet = newCita.profesional.usuario.walletAddress;
+
+    if (!clienteWallet || !profesionalWallet) {
+      return res.status(400).json({ 
+        message: "El cliente o profesional no tiene wallet configurado" 
+      });
+    }
+
+    // 3. Iniciar el pago automáticamente
+    const descripcionPago = `Cita: ${newCita.servicio.nombre} - ${newCita.profesional.nombre}`;
+    
+    const paymentResult = await initiatePayment(
+      clienteWallet,
+      profesionalWallet,
+      parseFloat(monto),
+      descripcionPago
+    );
+
+    // 4. Retornar tanto la cita como la información del pago
+    res.status(201).json({
+      cita: newCita,
+      pago: paymentResult
+    });
 
   } catch (error) {
     console.error("Error al crear la cita:", error);

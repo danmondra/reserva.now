@@ -59,9 +59,9 @@ export const usePayment = () => {
       const result = await response.json();
       return result;
 
-    } catch (err) {
-      setError(err.message);
-      return { success: false, error: err.message };
+    } catch (error) {
+      setError(error.message);
+      return { success: false, error: error.message };
     } finally {
       setLoading(false);
     }
@@ -72,8 +72,8 @@ export const usePayment = () => {
       const response = await fetch('/api/payments/users');
       const result = await response.json();
       return result;
-    } catch (err) {
-      return { success: false, error: err.message };
+    } catch (error) {
+      return { success: false, error: error.message };
     }
   };
 

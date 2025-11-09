@@ -9,7 +9,6 @@ import {
 const router = Router();
 
 // Rutas de citas requieren autenticación
-
 router.post('/citas', authRequired, createCita);
 // Ver mis citas (como cliente)
 router.get('/citas/me', authRequired, getMyCitas);
