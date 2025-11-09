@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Usuario" ALTER COLUMN "keyId" DROP NOT NULL,
+ALTER COLUMN "privateKeyPath" DROP NOT NULL,
+ALTER COLUMN "walletAddress" DROP NOT NULL;

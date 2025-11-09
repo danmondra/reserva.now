@@ -29,9 +29,9 @@ model Usuario {
   reseñas       Reseña[] 
   profesional   Profesional?
 
-  walletAddress     String        @unique
-  keyId             String
-  privateKeyPath    String
+  walletAddress     String?        @unique
+  keyId             String?
+  privateKeyPath    String?
 }
 
 model Profesional {
