@@ -74,6 +74,68 @@ export const createCita = async (req, res) => {
   }
 };
 
+
+export const completeCitaPayment = async (req, res) => {
+  try {
+    const { id: citaId } = req.params;
+    const { quoteId, continueUri, continueToken } = req.body;
+
+    if (!quoteId || !continueUri || !continueToken) {
+      return res.status(400).json({ 
+        message: "Datos de pago incompletos" 
+      });
+    }
+
+    // 1. Buscar la cita para verificar que existe y pertenece al usuario
+    const cita = await prisma.cita.findUnique({
+      where: { id: parseInt(citaId) },
+      include: {
+        usuario: { select: { id: true, walletAddress: true } },
+        profesional: { 
+          include: { 
+            usuario: { select: { walletAddress: true } }
+          } 
+        }
+      }
+    });
+
+    if (!cita) {
+      return res.status(404).json({ message: "Cita no encontrada" });
+    }
+
+    // Verificar que el usuario actual es el dueño de la cita
+    if (cita.usuario.id !== req.user.id) {
+      return res.status(403).json({ message: "No autorizado para esta cita" });
+    }
+
+    console.log('Completando pago para cita:', citaId);
+
+    // 2. Completar el pago en Open Payments
+    const paymentResult = await completePaymentAfterAuth(
+      quoteId,
+      continueUri,
+      continueToken
+    );
+
+
+    // 4. Retornar resultado
+    res.json({
+      success: true,
+      cita: citaActualizada,
+      pago: paymentResult,
+      message: 'Pago completado exitosamente'
+    });
+
+  } catch (error) {
+    console.error("Error al completar el pago:", error);
+    res.status(500).json({ 
+      success: false,
+      message: "Error al completar el pago",
+      error: error.message 
+    });
+  }
+};
+
 /**
  * Obtiene "Mis Citas"
  * Ruta: GET /api/citas/me

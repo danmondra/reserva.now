@@ -3,13 +3,15 @@ import { authRequired } from '../middlewares/auth.middleware.js';
 import {
   createCita,
   getMyCitas,
-  getMyProfesionalCitas
+  getMyProfesionalCitas,
+  completeCitaPayment
 } from '../controllers/cita.controller.js';
 
 const router = Router();
 
 // Rutas de citas requieren autenticación
 router.post('/citas', authRequired, createCita);
+router.post('/citas/:id/complete-payment', authRequired, completeCitaPayment);
 // Ver mis citas (como cliente)
 router.get('/citas/me', authRequired, getMyCitas);
 // Ver las citas (como proveedor)
