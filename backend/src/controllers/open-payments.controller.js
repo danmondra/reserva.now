@@ -1,48 +1,80 @@
-import { createAuthenticatedClient, isFinalizedGrant, OpenPaymentsClientError } from '@interledger/open-payments';
-import { readFileSync } from 'fs';
-import path from 'path';
+import { initiatePayment, completePaymentAfterAuth } from '../utils/openPayments.js';
 
-usuario.walletAddress,
-    usuario.keyId,
-    usuario.privateKeyPath
-
-export const openPaymentsStatus = async (req, res) => {
+/**
+ * Crear un nuevo pago - solo procesa en Open Payments
+ */
+export const createPayment = async (req, res) => {
   try {
-    const { usuarioId } = req.params;
+    const { amount, description } = req.body;
 
-    const usuario = await prisma.usuario.findUnique({
-      where: { id: parseInt(usuarioId) }
-    });
+    // Iniciar el pago en Open Payments (sin guardar en DB)
+    const paymentResult = await initiatePayment(amount, description);
 
-    if (!usuario) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    }
-    const privatekey = readFileSync(path.resolve(usuario.privateKeyPath), 'utf-8');
-
-    const client = await createAuthenticatedClient({
-      walletAddress: usuario.walletAddress,
-      keyId: usuario.keyId,
-      privateKeyPath: privatekey
-    });
-
-    console.log("Cliente Open Payments creado para el usuario:", usuario.id);
-    
-    // const grants = await client.getGrants();
-
-    // const grantsStatus = grants.map(grant => ({
-    //   grantId: grant.id,
-    //   finalized: isFinalizedGrant(grant),
-    //   details: grant
-    // }));
-
-    res.status(200).json({ grants: grantsStatus });
+    res.json(paymentResult);
 
   } catch (error) {
-    // console.error(error);
-    // if (error instanceof OpenPaymentsClientError) {
-    //   res.status(500).json({ message: "Error en Open Payments Client", details: error.message });
-    // } else {
-    //   res.status(500).json({ message: "Error interno del servidor al obtener el estado de Open Payments" });
-    // }
+    console.error('Error creating payment:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
   }
-} 
+};
+
+/**
+ * Completar pago después de autorización
+ */
+export const completePayment = async (req, res) => {
+  try {
+    const { quoteId, continueUri, continueToken } = req.body;
+
+    // Completar el pago en Open Payments
+    const completionResult = await completePaymentAfterAuth(
+      quoteId,
+      continueUri,
+      continueToken
+    );
+
+    res.json(completionResult);
+
+  } catch (error) {
+    console.error('Error completing payment:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error completando el pago'
+    });
+  }
+};
+
+/**
+ * Obtener wallets disponibles (opcional)
+ */
+export const getWallets = async (req, res) => {
+  try {
+    // Estos podrían venir de tu base de datos o ser fijos
+    const wallets = [
+      {
+        id: 'cliente',
+        name: 'Cliente Jorge',
+        walletUrl: 'https://ilp.interledger-test.dev/cliente-jorge'
+      },
+      {
+        id: 'proveedor', 
+        name: 'Proveedor Mariachis',
+        walletUrl: 'https://ilp.interledger-test.dev/proveedor-mariachis'
+      }
+    ];
+
+    res.json({
+      success: true,
+      wallets
+    });
+
+  } catch (error) {
+    console.error('Error getting wallets:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error obteniendo wallets'
+    });
+  }
+};
