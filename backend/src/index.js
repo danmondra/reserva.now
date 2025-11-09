@@ -26,10 +26,10 @@ app.use(cookieParser());
 app.use('/api', authRoutes);
 app.use('/api', profesionalRoutes);
 app.use('/api', categoriasRoutes);
-app.use('/api', profesionesRoutes)
-app.use('/api', serviciosRoutes)
-app.use('/api', citasRoutes)
-app.use('/api', reseñasRoutes)
+app.use('/api', profesionesRoutes);
+app.use('/api', serviciosRoutes);
+app.use('/api', citasRoutes);
+app.use('/api', reseñasRoutes);
 
 const PORT = process.env.PORT || 4000;
 
