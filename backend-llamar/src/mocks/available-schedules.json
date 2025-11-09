@@ -1,0 +1,71 @@
+{
+  "10 noviembre": {
+    "dayname": "lunes",
+    "availableSchedules": [
+      ["8:00", "9:00"],
+      ["9:00", "10:00"],
+      ["15:00", "16:00"]
+    ],
+    "timestamp": 1731216000000,
+    "duration_ms": 3600000
+  },
+  "11 noviembre": {
+    "dayname": "martes",
+    "availableSchedules": [
+      ["10:00", "11:00"],
+      ["11:00", "12:00"]
+    ],
+    "timestamp": 1731302400000,
+    "duration_ms": 3600000
+  },
+  "12 noviembre": {
+    "dayname": "miercoles",
+    "availableSchedules": [
+      ["8:00", "9:00"],
+      ["14:00", "15:00"],
+      ["16:00", "17:00"]
+    ],
+    "timestamp": 1731388800000,
+    "duration_ms": 3600000
+  },
+  "13 noviembre": {
+    "dayname": "jueves",
+    "availableSchedules": [
+      ["9:00", "10:00"],
+      ["10:00", "11:00"],
+      ["13:00", "14:00"]
+    ],
+    "timestamp": 1731475200000,
+    "duration_ms": 3600000
+  },
+  "14 noviembre": {
+    "dayname": "viernes",
+    "availableSchedules": [
+      ["8:00", "9:00"],
+      ["9:00", "10:00"],
+      ["10:00", "11:00"],
+      ["15:00", "16:00"]
+    ],
+    "timestamp": 1731561600000,
+    "duration_ms": 3600000
+  },
+  "15 noviembre": {
+    "dayname": "sabado",
+    "availableSchedules": [
+      ["9:00", "10:00"],
+      ["10:00", "11:00"]
+    ],
+    "timestamp": 1731648000000,
+    "duration_ms": 3600000
+  },
+  "16 noviembre": {
+    "dayname": "domingo",
+    "availableSchedules": [
+      ["11:00", "12:00"],
+      ["12:00", "13:00"]
+    ],
+    "timestamp": 1731734400000,
+    "duration_ms": 3600000
+  }
+}
+
