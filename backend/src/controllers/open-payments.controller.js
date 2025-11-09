@@ -26,6 +26,7 @@ export const openPaymentsStatus = async (req, res) => {
     });
 
     console.log("Cliente Open Payments creado para el usuario:", usuario.id);
+    
     // const grants = await client.getGrants();
 
     // const grantsStatus = grants.map(grant => ({
