@@ -26,8 +26,8 @@ export interface Category {
 
 export const categories: Category[] = [
   {
-    id: 'oficios',
-    nombre: 'Oficios',
+    id: 'plomeria',
+    nombre: 'Plomería',
     profesionales: [
       {
         id: 1,
@@ -46,7 +46,13 @@ export const categories: Category[] = [
         horario: 'Lun-Dom: 7:00-22:00',
         telefono: '55-1234-5678',
         servicios: ['Fugas de agua', 'Destapado de drenaje', 'Instalación de tuberías', 'Calentadores', 'Tinacos']
-      },
+      }
+    ]
+  },
+  {
+    id: 'electricidad',
+    nombre: 'Electricidad',
+    profesionales: [
       {
         id: 2,
         nombre: 'Electricidad Total',
@@ -64,7 +70,13 @@ export const categories: Category[] = [
         horario: 'Lun-Sáb: 8:00-20:00',
         telefono: '55-2345-6789',
         servicios: ['Instalación eléctrica', 'Reparación de cortos', 'Tableros', 'Iluminación', 'Contactos']
-      },
+      }
+    ]
+  },
+  {
+    id: 'mecanica',
+    nombre: 'Mecánica',
+    profesionales: [
       {
         id: 3,
         nombre: 'Taller Mecánico Express',
@@ -86,8 +98,8 @@ export const categories: Category[] = [
     ]
   },
   {
-    id: 'artesanos',
-    nombre: 'Artesanos',
+    id: 'carpinteria',
+    nombre: 'Carpintería',
     profesionales: [
       {
         id: 4,
@@ -106,7 +118,13 @@ export const categories: Category[] = [
         horario: 'Lun-Vie: 9:00-18:00, Sáb: 9:00-14:00',
         telefono: '55-7890-1234',
         servicios: ['Muebles a medida', 'Restauración', 'Closets', 'Cocinas integrales', 'Puertas de madera']
-      },
+      }
+    ]
+  },
+  {
+    id: 'joyeria',
+    nombre: 'Joyería',
+    profesionales: [
       {
         id: 5,
         nombre: 'Joyería Artesanal',
@@ -124,7 +142,13 @@ export const categories: Category[] = [
         horario: 'Lun-Vie: 10:00-19:00, Sáb: 10:00-16:00',
         telefono: '55-0123-4567',
         servicios: ['Diseño personalizado', 'Reparación', 'Grabado', 'Restauración', 'Anillos de compromiso']
-      },
+      }
+    ]
+  },
+  {
+    id: 'sastreria',
+    nombre: 'Sastrería',
+    profesionales: [
       {
         id: 6,
         nombre: 'Sastrería Elegante',
@@ -146,8 +170,8 @@ export const categories: Category[] = [
     ]
   },
   {
-    id: 'profesionales',
-    nombre: 'Profesionales',
+    id: 'odontologia',
+    nombre: 'Odontología',
     profesionales: [
       {
         id: 7,
@@ -166,7 +190,13 @@ export const categories: Category[] = [
         horario: 'Lun-Vie: 9:00-19:00, Sáb: 9:00-14:00',
         telefono: '55-3456-7012',
         servicios: ['Limpieza dental', 'Blanqueamiento', 'Ortodoncia', 'Implantes', 'Endodoncia']
-      },
+      }
+    ]
+  },
+  {
+    id: 'legal',
+    nombre: 'Legal',
+    profesionales: [
       {
         id: 8,
         nombre: 'Lic. Ana Martínez',
@@ -184,7 +214,13 @@ export const categories: Category[] = [
         horario: 'Lun-Vie: 9:00-18:00',
         telefono: '55-4567-8123',
         servicios: ['Derecho civil', 'Derecho familiar', 'Contratos', 'Divorcios', 'Testamentos']
-      },
+      }
+    ]
+  },
+  {
+    id: 'psicologia',
+    nombre: 'Psicología',
+    profesionales: [
       {
         id: 9,
         nombre: 'Psic. Patricia Gómez',

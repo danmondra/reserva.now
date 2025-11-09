@@ -53,7 +53,7 @@ export default function ClientNotificationsPage() {
     <div className='min-h-screen pb-20 bg-gray-50'>
       <header className='bg-[#fbbf24] text-white p-6 shadow-md sticky top-0 z-10'>
         <div className='flex items-center gap-3'>
-          <Link href='/cuenta' className='text-2xl'>
+          <Link href='/cuenta-cliente' className='text-2xl'>
             ←
           </Link>
           <h1 className='text-2xl font-bold'>Notificaciones</h1>

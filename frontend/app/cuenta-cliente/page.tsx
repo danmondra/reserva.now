@@ -15,10 +15,10 @@ export default function CuentaPage () {
   }, [])
 
   const menuItems = [
-    { id: 1, titulo: 'Actualizar Perfil', icon: '✏️', descripcion: 'Edita tu información personal', href: '/cuenta/update' },
-    { id: 2, titulo: 'Notificaciones', icon: '🔔', descripcion: 'Configura tus alertas', href: '/cuenta/notifications' },
-    { id: 3, titulo: 'Interledger', icon: '💳', descripcion: 'Gestiona tu wallet y pagos', href: '/cuenta/interledger' },
-    { id: 4, titulo: 'Ayuda y Soporte', icon: '❓', descripcion: 'Preguntas frecuentes y contacto', href: '/cuenta/help' },
+    { id: 1, titulo: 'Actualizar Perfil', icon: '✏️', descripcion: 'Edita tu información personal', href: '/cuenta-cliente/update' },
+    { id: 2, titulo: 'Notificaciones', icon: '🔔', descripcion: 'Configura tus alertas', href: '/cuenta-cliente/notifications' },
+    { id: 3, titulo: 'Interledger', icon: '💳', descripcion: 'Gestiona tu wallet y pagos', href: '/cuenta-cliente/interledger' },
+    { id: 4, titulo: 'Ayuda y Soporte', icon: '❓', descripcion: 'Preguntas frecuentes y contacto', href: '/cuenta-cliente/help' },
   ]
 
   const handleLogout = () => {
